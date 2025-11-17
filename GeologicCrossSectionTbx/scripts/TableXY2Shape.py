@@ -23,7 +23,7 @@ for row in rows:
         pt.Y = lat
         row.Shape = pt
         rows.updateRow(row)
-        print row.Shape.getPart().X, row.Shape.getPart().Y
+        print(row.Shape.getPart().X, row.Shape.getPart().Y)
         row.Easting = row.Shape.getPart().X
         row.Northing = row.Shape.getPart().Y
         rows.updateRow(row)

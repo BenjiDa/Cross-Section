@@ -132,7 +132,7 @@ def MakeEventLyr(layer, NameField):
         # if the proto shape is point, write to a permanent shapefile,
         # this is the new geometry.
         cur = gp.searchcursor(tbl)
-        row = cur.next()
+        row = next(cur)
         shape = row.getvalue("OrigShape")
         if shape.lower() == "point":
             gp.copyfeatures(lyr, layer + "_ev.shp")
@@ -153,7 +153,7 @@ def XYZGenerate(layer, ve):
         # open a search cursor on the events layer
         evlyr = layer + "_ev"
         rows = gp.SearchCursor(evlyr, "", "", "", "MLyrFID")
-        row = rows.next()
+        row = next(rows)
         # get the proto-layer shape type
         # write the geometry to a text file
         # points are addressed in Rebuild
@@ -188,7 +188,7 @@ def XYZGenerate(layer, ve):
                     outf.write(str(row.getvalue("origid")) + "\n")
                     outf.write(str(pnt.x) + " " + str(pnt.y) + " " + str(z) + "\n")
                     ID = ID + 1
-                row = rows.next()
+                row = next(rows)
 
             # need one last END at the end of the file
             outf.write("END\n")
@@ -211,7 +211,7 @@ def Rebuild(layer, XSecLayer, ve):
         gp.AddMessage("Building final 3D features from input %s" % layer)
         # get the proto-shape
         cur = gp.searchcursor(layer + "_pts.shp")
-        row = cur.next()
+        row = next(cur)
         shape = row.getvalue("OrigShape")
 
         # if the proto-shape is point, just update the z of the point in the events shapefile

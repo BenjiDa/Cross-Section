@@ -21,7 +21,7 @@ import traceback
 def tracebackReport():
     tb = sys.exc_info()[2]
     tbinfo = traceback.format_tb(tb)[0]
-    pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+    pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
     arcpy.AddError(pymsg)
     raise SystemError
 
@@ -74,7 +74,7 @@ try:
                     newarray = arcpy.Array()
                                                     
                     # otherwise get the first point in the array of points
-                    pnt = array.next()
+                    pnt = next(array)
                                     
                     while pnt:
                         pnt.Y = float(pnt.Y) * float(ve)
@@ -82,7 +82,7 @@ try:
                                     
                         #Add the modified point into the new array
                         newarray.add(pnt)
-                        pnt = array.next()
+                        pnt = next(array)
             
                     #Put the new array into the new feature  shape
                     new_Feat_Shape.add(newarray)

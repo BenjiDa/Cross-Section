@@ -47,7 +47,7 @@ def addAndCalc(layer, field, calc):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
     finally:
@@ -80,7 +80,7 @@ def cleanup(keepf, scratchDir):
         # get the traceback object
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -134,7 +134,7 @@ def interpolate(inLayer, dem, Zfeat):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
     finally:
@@ -149,7 +149,7 @@ def measureLines(inLayer, idField, Mlines, lengthVar, fromFld, toFld, cp):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
     finally:
@@ -173,7 +173,7 @@ def plan2side(ZMlines, ve):
                 newarray = arcpy.Array()
                                                     
                 # otherwise get the first point in the array of points
-                pnt = array.next()
+                pnt = next(array)
                                     
                 while pnt:
                     pnt.X = float(pnt.M)
@@ -181,7 +181,7 @@ def plan2side(ZMlines, ve):
                                     
                     #Add the modified point into the new array
                     newarray.add(pnt)
-                    pnt = array.next()
+                    pnt = next(array)
             
                 #Put the new array into the new feature  shape
                 new_Feat_Shape.add(newarray)
@@ -195,7 +195,7 @@ def plan2side(ZMlines, ve):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -222,7 +222,7 @@ def addZ(ZptLayer):
 	except:
 		tb = sys.exc_info()[2]
 		tbinfo = traceback.format_tb(tb)[0]
-		pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+		pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
 		arcpy.AddError(pymsg)
 		raise SystemError
 
@@ -235,7 +235,7 @@ def createEventTable(features, ZMline, rkey, buff, eventTable, rProps):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -312,7 +312,7 @@ def boreholeLines(scratchDir, outFC, Zboreholes, eventTable, bhIdField, ZField, 
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -369,7 +369,7 @@ def zPoints2XSec (outName, Zpts, eventTable, ZField, ve, scratchDir):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -404,7 +404,7 @@ def placeEvents(inRoutes, idRteFld, eventTable, eventRteFld, fromVar, toVar, eve
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -428,7 +428,7 @@ def transferAtts(inFC, joinTable, parentKey, childKey, fInfo, outName):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -440,7 +440,7 @@ def intersectFeatures(interList, outFC, attParm, clusterParm, outType):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -491,7 +491,7 @@ def xsecPoints(outFC, Zpts, eventTable, bhZField, ve, scratchDir):
 	except:
 		tb = sys.exc_info()[2]
 		tbinfo = traceback.format_tb(tb)[0]
-		pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+		pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
 		arcpy.AddError(pymsg)
 		raise SystemError
 
@@ -524,7 +524,7 @@ def vertexDictionary(ZMline):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -595,7 +595,7 @@ def XYZfile2features(xyzFile, threeDFC, shpType):
         # get the traceback object
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
 
         raise SystemError

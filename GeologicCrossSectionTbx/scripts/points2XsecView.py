@@ -35,7 +35,7 @@ def checkExtensions():
         arcpy.AddMessage('3D Analyst extension is unavailable')
         raise SystemError
     except:
-        print arcpy.GetMessages(2)
+        print(arcpy.GetMessages(2))
 
 def getCPValue(quadrant):
     cpDict = {'northwest':'UPPER_LEFT', 'southwest':'LOWER_LEFT', 'northeast':'UPPER_RIGHT', 'southeast':'LOWER_RIGHT'}
@@ -337,7 +337,7 @@ try:
         
     #clear the spatial reference of the final feature class
     unknown = arcpy.SpatialReference()
-    unknown.loadFromString(u'{B286C06B-0879-11D2-AACA-00C04FA33C20};-450359962737.05 -450359962737.05 10000;#;#;0.001;#;#;IsHighPrecision')
+    unknown.loadFromString('{B286C06B-0879-11D2-AACA-00C04FA33C20};-450359962737.05 -450359962737.05 10000;#;#;0.001;#;#;IsHighPrecision')
     arcpy.DefineProjection_management(eventPts, unknown)
     
     #some cleanup

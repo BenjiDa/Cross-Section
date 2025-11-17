@@ -35,7 +35,7 @@ def checkExtensions():
         arcpy.AddMessage('3D Analyst extension is unavailable')
         raise SystemError
     except:
-        print arcpy.GetMessages(2)
+        print(arcpy.GetMessages(2))
 
 def getCPValue(quadrant):
     cpDict = {'northwest':'UPPER_LEFT', 'southwest':'LOWER_LEFT', 'northeast':'UPPER_RIGHT', 'southeast':'LOWER_RIGHT'}
@@ -59,7 +59,7 @@ def addAndCalc(layer, field, calc):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
     finally:
@@ -88,7 +88,7 @@ def addZ(ZptLayer):
 	except:
 		tb = sys.exc_info()[2]
 		tbinfo = traceback.format_tb(tb)[0]
-		pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+		pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
 		arcpy.AddError(pymsg)
 		raise SystemError
   
@@ -172,7 +172,7 @@ def boreholeLines():
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -396,6 +396,6 @@ try:
 except:
     tb = sys.exc_info()[2]
     tbinfo = traceback.format_tb(tb)[0]
-    pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+    pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
     arcpy.AddError(pymsg)
     raise SystemError

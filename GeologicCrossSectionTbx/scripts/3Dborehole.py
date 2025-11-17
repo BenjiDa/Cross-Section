@@ -50,7 +50,7 @@ def checkinputs(raster, pointlayer):
         layerlist = [pointlayer]
         for layer in layerlist:
             sr2 = gp.Describe(layer).SpatialReference.Name
-            if sr1 <> sr2:
+            if sr1 != sr2:
                 gp.AddMessage("Input layers do not share the same spatial reference!")
                 raise SystemError
     except:
@@ -82,7 +82,7 @@ def AddZ(Zbhpts):
             row.SetValue("DEM_Z", pnt.Z)
             # update the row
             rows.UpdateRow(row)
-            row = rows.next()
+            row = next(rows)
             
         # delete cursor and row objects    
         del rows, row
@@ -268,7 +268,7 @@ keepf = gp.GetParameterAsText(11)
 # BEGIN
 # *******************************************************
 # Check for ArcInfo license
-if gp.CheckProduct("ArcInfo") <> "Available":
+if gp.CheckProduct("ArcInfo") != "Available":
     gp.AddMessage("ArcInfo license is required to run this tool.")
     raise SystemError
 

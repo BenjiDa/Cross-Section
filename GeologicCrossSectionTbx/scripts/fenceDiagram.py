@@ -47,7 +47,7 @@ def checkExtensions():
         # get the traceback object
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         gp.AddError(pymsg)
 
 
@@ -81,7 +81,7 @@ def checkInputs(xSecLayer, rasterLayer):
         # get the traceback object
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         gp.AddError(pymsg)
 
 # PARAMETERS
@@ -183,7 +183,7 @@ for layer in featList:
     if shpType == 'Point':
         #open an update cursor on the copy
         rows = gp.UpdateCursor(layCopy)
-        row = rows.next()
+        row = next(rows)
         
         while row:
             #get the geometry of this point
@@ -206,7 +206,7 @@ for layer in featList:
             #update the row's shape
             row.shape = newPnt
             rows.UpdateRow(row)
-            row = rows.next()
+            row = next(rows)
             
     else: #we're dealing with lines or polygons which are not so easy to edit
         #the geometries of
@@ -214,7 +214,7 @@ for layer in featList:
         
         #open a search cursor
         rows = gp.SearchCursor(layCopy)
-        row = rows.next()
+        row = next(rows)
         
         #open a text file to start writing coordinates to
         xyzFile = os.path.join(scratchFolder, baseName + '_xyz.txt')
@@ -241,7 +241,7 @@ for layer in featList:
                 part = feat.getPart(partnum)
 
                 #get each vertex
-                pnt = part.next()
+                pnt = next(part)
                 pntcount = 0
 
                 while pnt:
@@ -256,14 +256,14 @@ for layer in featList:
                         gp.AddMessage('9999 exception with ' + str(row.OBJECTID) + ' : ' + str(pnt.x))
                         
                     #otherwise just go on to the next point
-                    pnt = part.next()
+                    pnt = next(part)
                     
                 #put the array of vertices into the row array
                 partnum += 1
             
             #update the row's shape
             outF.write('END\n')
-            row = rows.next()
+            row = next(rows)
             
     outF.write('END')
     outF.close

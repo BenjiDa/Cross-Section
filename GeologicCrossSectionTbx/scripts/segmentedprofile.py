@@ -32,7 +32,7 @@ def checkExtensions():
         arcpy.AddMessage('3D Analyst extension is unavailable')
         raise SystemError
     except:
-        print arcpy.GetMessages(2)
+        print(arcpy.GetMessages(2))
 
 def getCPValue(quadrant):
     cpDict = {'northwest':'UPPER_LEFT', 'southwest':'LOWER_LEFT', 'northeast':'UPPER_RIGHT', 'southeast':'LOWER_RIGHT'}
@@ -57,7 +57,7 @@ def addAndCalc(layer, field, calc):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
     finally:
@@ -73,7 +73,7 @@ def createEventTable(features, zmLine, rkey, buff, eventTable, rProps):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -108,7 +108,7 @@ def placeEvents(inRoutes, idRteFld, eventTable, eventRteFld, fromVar, toVar, eve
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -130,7 +130,7 @@ def plan2side(zmLines, ve):
                 newarray = arcpy.Array()
 
                 # otherwise get the first point in the array of points
-                pnt = array.next()
+                pnt = next(array)
 
                 while pnt:
                     pnt.X = float(pnt.M)
@@ -138,7 +138,7 @@ def plan2side(zmLines, ve):
 
                     #Add the modified point into the new array
                     newarray.add(pnt)
-                    pnt = array.next()
+                    pnt = next(array)
 
                 #Put the new array into the new feature  shape
                 new_Feat_Shape.add(newarray)
@@ -152,7 +152,7 @@ def plan2side(zmLines, ve):
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
-        pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+        pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
         arcpy.AddError(pymsg)
         raise SystemError
 
@@ -303,7 +303,7 @@ try:
 except:
     tb = sys.exc_info()[2]
     tbinfo = traceback.format_tb(tb)[0]
-    pymsg = tbinfo + '\n' + str(sys.exc_type)+ ': ' + str(sys.exc_value)
+    pymsg = tbinfo + '\n' + str(sys.exc_info()[0])+ ': ' + str(sys.exc_info()[1])
     arcpy.AddError(pymsg)
     raise SystemError
 
